@@ -15,6 +15,7 @@ namespace Punter
         private List<RadioButton> radioButtons = new List<RadioButton>();
         private World world = new World();
 
+        // two things to control state of the form.
         private Punter selected;
 
         private Action Max;
@@ -33,6 +34,10 @@ namespace Punter
                 radio.CheckedChanged -= PerformMutualExclusion;
                 radio.CheckedChanged += PerformMutualExclusion;
             }
+
+            gboxJoe.Text = world.Joe.name;
+            gboxBob.Text = world.Bob.name;
+            gboxAlice.Text = world.Alice.name;
 
             rdoJoe.CheckedChanged += setNumAmount(world.Joe);
             rdoBob.CheckedChanged += setNumAmount(world.Bob);
@@ -57,7 +62,7 @@ namespace Punter
             }
         }
 
-        // what proceeds are 3 functions for setting the maxium amount to bet.
+        //setting the maxium amount to bet.
         private EventHandler setNumAmount(Punter punter)
         {
             return (delegate( object sender, EventArgs e)
@@ -161,6 +166,7 @@ namespace Punter
 
         }
 
+        // we check  for bankruptancy and blank the gboxes
         private void Bankrupt()
         {
             foreach (Punter punter in world.Punters)
@@ -177,6 +183,7 @@ namespace Punter
             }
         }
 
+        
         private async void btnRace_Click(object sender, EventArgs e)
         {
             var winner = await world.Race();

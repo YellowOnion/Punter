@@ -50,7 +50,7 @@ namespace Punter
     {
         public Bob()
         {
-            name = "Bob \"Bobbie\" Bobson" ;
+            name = "Bob Bobson" ;
         }
     }
 
