@@ -183,7 +183,26 @@ namespace Punter
             }
         }
 
-        
+        private void GameOver()
+        {
+            bool allBankrupt = true;
+            foreach (Punter punter in world.Punters)
+            {
+                allBankrupt = punter.wallet == 0 && allBankrupt;
+            }
+
+            if (allBankrupt)
+            {
+                world = new World();
+                MessageBox.Show("GAME OVER!");
+                gboxJoe.Enabled = true;
+                gboxAlice.Enabled = true;
+                gboxBob.Enabled = true;
+                Draw();
+            }
+
+        }
+
         private async void btnRace_Click(object sender, EventArgs e)
         {
             var winner = await world.Race();
@@ -193,6 +212,7 @@ namespace Punter
             world.Reset();
             Bankrupt();
             Max();
+            GameOver();
         }
     }
 }
